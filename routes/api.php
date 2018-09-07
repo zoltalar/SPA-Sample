@@ -16,6 +16,10 @@ Route::group(['prefix' => 'auth'], function() {
     Route::post('register', 'Api\AuthController@register');
 });
 
+Route::group(['prefix' => 'tweets'], function() {
+    Route::post('store', 'Api\TweetsController@store');
+});
+
 Route::group(['prefix' => 'users'], function() {
     Route::get('index', 'Api\UsersController@index');
     Route::get('{user}', 'Api\UsersController@show');

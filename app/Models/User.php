@@ -12,7 +12,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
-class User extends Base implements
+final class User extends Base implements
     AuthenticatableContract,
     AuthorizableContract,
     CanResetPasswordContract
