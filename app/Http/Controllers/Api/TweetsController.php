@@ -10,6 +10,11 @@ use Validator;
 
 class TweetsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     public function index()
     {
         return TweetResource::collection(Tweet::paginate());

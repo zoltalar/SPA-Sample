@@ -12,8 +12,8 @@
 */
 
 Route::group(['prefix' => 'auth'], function() {
-    Route::post('login', 'Api\AuthController@login');
-    Route::post('register', 'Api\AuthController@register');
+    Route::post('login', ['as' => 'login', 'uses' => 'Api\AuthController@login']);
+    Route::post('register', ['as' => 'register', 'uses' => 'Api\AuthController@register']);
 });
 
 Route::group(['prefix' => 'tweets'], function() {

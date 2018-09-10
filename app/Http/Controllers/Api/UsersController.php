@@ -9,6 +9,11 @@ use Validator;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     public function index()
     {
         return UserResource::collection(User::paginate());
