@@ -12,7 +12,7 @@ class TweetsController extends Controller
 {
     public function index()
     {
-        return TweetResource::collection(Tweet::all());
+        return TweetResource::collection(Tweet::paginate());
     }
 
     public function store(Request $request)
