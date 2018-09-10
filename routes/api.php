@@ -17,6 +17,7 @@ Route::group(['prefix' => 'auth'], function() {
 });
 
 Route::group(['prefix' => 'tweets'], function() {
+    Route::get('index', 'Api\TweetsController@index');
     Route::post('store', 'Api\TweetsController@store');
 });
 

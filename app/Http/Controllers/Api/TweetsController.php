@@ -10,6 +10,11 @@ use Validator;
 
 class TweetsController extends Controller
 {
+    public function index()
+    {
+        return TweetResource::collection(Tweet::all());
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), Tweet::rules());
