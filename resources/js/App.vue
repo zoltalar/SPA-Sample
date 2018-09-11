@@ -22,6 +22,8 @@
                 </ul>
             </div>
         </nav>
-        <router-view></router-view>
+        <div class="pt-5">
+            <router-view></router-view>
+        </div>
     </div>
 </template>

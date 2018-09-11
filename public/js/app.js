@@ -11703,67 +11703,62 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { id: "root" } },
-    [
-      _c(
-        "nav",
-        { staticClass: "navbar navbar-expand-lg navbar-light bg-light" },
-        [
-          _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
-            _vm._v("Twitter")
-          ]),
-          _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "collapse navbar-collapse",
-              attrs: { id: "navbar-primary" }
-            },
-            [
-              _c("ul", { staticClass: "navbar-nav mr-auto" }, [
-                _vm._m(1),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      { staticClass: "nav-link", attrs: { to: "/login" } },
-                      [_vm._v("Login")]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      { staticClass: "nav-link", attrs: { to: "/register" } },
-                      [_vm._v("Register")]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _vm._m(2)
-              ])
-            ]
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c("router-view")
-    ],
-    1
-  )
+  return _c("div", { attrs: { id: "root" } }, [
+    _c(
+      "nav",
+      { staticClass: "navbar navbar-expand-lg navbar-light bg-light" },
+      [
+        _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
+          _vm._v("Twitter")
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "collapse navbar-collapse",
+            attrs: { id: "navbar-primary" }
+          },
+          [
+            _c("ul", { staticClass: "navbar-nav mr-auto" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _c(
+                    "router-link",
+                    { staticClass: "nav-link", attrs: { to: "/login" } },
+                    [_vm._v("Login")]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _c(
+                    "router-link",
+                    { staticClass: "nav-link", attrs: { to: "/register" } },
+                    [_vm._v("Register")]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm._m(2)
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "pt-5" }, [_c("router-view")], 1)
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -14518,9 +14513,55 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("p", [_vm._v("Login")])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm-4 offset-sm-4" }, [
+        _c("form", { staticClass: "form-login" }, [
+          _c("h2", { staticClass: "mb-3" }, [_vm._v("Login")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                type: "email",
+                placeholder: "E-mail Address",
+                maxlength: "191"
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                type: "password",
+                placeholder: "Password",
+                maxlength: "40"
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-lg btn-primary btn-block",
+                attrs: { type: "submit" }
+              },
+              [_vm._v("Login")]
+            )
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
