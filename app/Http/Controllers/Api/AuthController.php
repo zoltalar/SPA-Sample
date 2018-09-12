@@ -14,7 +14,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         if ( ! auth()->attempt($request->only(['email', 'password']))) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'Unauthorized']);
         }
 
         $user = $request->user();
@@ -36,7 +36,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), User::rules());
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()]);
+            return response()->json(['error' => $validator->errors()->toArray()]);
         }
 
         $user = new User();
