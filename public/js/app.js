@@ -15452,6 +15452,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             _this.error[property] = response.data.error[property][0];
                         }
                     }
+                } else {
+                    _this.$route.router.go('login');
                 }
             });
         },
@@ -15635,7 +15637,7 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-lg btn-primary btn-block",
-              attrs: { type: "submit" },
+              attrs: { type: "button" },
               on: {
                 click: function($event) {
                   _vm.register()

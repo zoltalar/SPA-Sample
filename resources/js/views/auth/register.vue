@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-lg btn-primary btn-block" @click="register()">Register</button>
+                    <button type="button" class="btn btn-lg btn-primary btn-block" @click="register()">Register</button>
                 </div>
             </form>
         </div>
@@ -59,6 +59,8 @@
                                     this.error[property] = response.data.error[property][0];
                                 }
                             }
+                        } else {
+                            this.$route.router.go('login');
                         }
                     })
             },
