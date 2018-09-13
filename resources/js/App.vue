@@ -19,6 +19,9 @@
                     <li class="nav-item">
                         <a href="#" class="nav-link">Tweet</a>
                     </li>
+                    <li class="nav-item" v-show="userName() != null">
+                        <router-link to="/logout" class="nav-link">Logout</router-link>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -27,3 +30,22 @@
         </div>
     </div>
 </template>
+<script>
+    export default {        
+        methods: {
+            userName() {
+                return this.storageItem('userName');
+            },
+            email() {
+                return this.storageItem('email');
+            },
+            storageItem(item) {
+                if (window.localStorage) {
+                    let storage = window.localStorage;
+                    return storage.getItem(item);
+                }
+                return null;
+            }
+        }
+    }
+</script>

@@ -45,6 +45,8 @@
                                 storage.setItem('accessToken', response.data.access_token);
                                 storage.setItem('tokenType', response.data.token_type);
                                 storage.setItem('expiresAt', response.data.expires_at);
+                                storage.setItem('userName', response.data.user.name);
+                                storage.setItem('email', response.data.user.email);
                             }
                         }
                     });
