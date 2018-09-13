@@ -3,6 +3,7 @@
         <div class="col-sm-4 offset-sm-4">
             <form>
                 <h3 class="mb-3">Login</h3>
+                <div class="alert alert-danger text-center" v-show="error">Invalid login credentials</div>
                 <div class="form-group">
                     <input type="email" class="form-control" placeholder="E-mail Address" maxlength="191" v-model="email">
                 </div>
@@ -10,7 +11,7 @@
                     <input type="password" class="form-control" placeholder="Password" maxlength="40" v-model="password">
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-lg btn-primary btn-block" @click="login()" :disabled="!enabled()">Login</button>
+                    <button type="button" class="btn btn-lg btn-primary btn-block" @click="login()" :disabled="!validated()">Login</button>
                 </div>
             </form>
         </div>
@@ -33,11 +34,22 @@
                         password: this.password
                     })
                     .then(response => {
-                        console.log(response.data);
-                        alert('test');
-                    })
+                        if (response.data.error) {
+                            this.error = true;
+                        } else {
+                            this.error = false;
+                            
+                            if (window.localStorage) {
+                                let storage = window.localStorage;
+                                
+                                storage.setItem('accessToken', response.data.access_token);
+                                storage.setItem('tokenType', response.data.token_type);
+                                storage.setItem('expiresAt', response.data.expires_at);
+                            }
+                        }
+                    });
             },
-            enabled() {
+            validated() {
                 return this.email !== '' && this.password !== '';
             }
         }

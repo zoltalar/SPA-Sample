@@ -1,7 +1,11 @@
 <template>
     <div class="row">
-        <div class="col-md-6 offset-md-2">
-            <form autocomplete="off">
+        <div class="col-sm-6 col-md-4 offset-sm-3 offset-md-4">
+            <div class="alert alert-info" v-show="registered">
+                Registration successful.
+                <router-link to="/login">Login</router-link>
+            </div>
+            <form autocomplete="off" v-show="!registered">
                 <h3 class="mb-3">Register</h3>
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Name" maxlength="191" v-model="name">
@@ -22,7 +26,7 @@
                     </div>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-lg btn-primary btn-block" @click="register()">Register</button>
+                    <button type="button" class="btn btn-lg btn-primary btn-block" @click="register()" :disabled="!validated()">Register</button>
                 </div>
             </form>
         </div>
@@ -39,7 +43,8 @@
                     name: '',
                     email: '',
                     password: ''
-                }
+                },
+                registered: false
             }
         },
         methods: {
@@ -60,11 +65,11 @@
                                 }
                             }
                         } else {
-                            this.$route.router.go('login');
+                            this.registered = true;
                         }
                     })
             },
-            enabled() {
+            validated() {
                 return this.name !== '' && this.email !== '' && this.password !== '';
             },
             reset() {
@@ -73,6 +78,18 @@
                     email: '',
                     password: ''
                 }
+            },
+            hasErrors() {
+                let errors = false;
+                
+                for (let property in this.error) {
+                    if (this.error[property] !== '') {
+                        errors = true;
+                        break;
+                    }
+                }
+                
+                return errors;
             }
         }
     }

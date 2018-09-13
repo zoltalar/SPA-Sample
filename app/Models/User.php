@@ -45,7 +45,7 @@ final class User extends Base implements
         return [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:5'
+            'password' => 'required|min:5|max:10'
         ];
     }
 }
