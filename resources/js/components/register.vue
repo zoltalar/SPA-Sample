@@ -3,7 +3,7 @@
         <div class="col-sm-6 col-md-4 offset-sm-3 offset-md-4">
             <div class="alert alert-info" v-show="registered">
                 Registration successful.
-                <router-link to="/login">Login</router-link>
+                <router-link :to="{ name: 'login' }">Login</router-link>
             </div>
             <form autocomplete="off" v-show="!registered">
                 <h3 class="mb-3">Register</h3>

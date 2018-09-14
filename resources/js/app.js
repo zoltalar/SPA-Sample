@@ -1,12 +1,14 @@
 import Vue from 'vue'
-import App from './App.vue'
+import App from './components/App'
 import router from './router'
+import store from './store'
 
 window.axios = require('axios')
 
 const app = new Vue({
     el: '#root',
-    components: { App },
+    router,
+    store,
     template: '<app></app>',
-    router
+    components: { App }
 })
