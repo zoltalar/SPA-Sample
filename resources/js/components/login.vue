@@ -35,15 +35,15 @@
                     })
                     .then(response => {
                         if (response.data.error) {
-                            this.error = true;
+                            this.error = true
                         } else {
-                            this.error = false;
+                            this.error = false
                             this.$store.dispatch('login', response.data)
                         }
                     });
             },
             validated() {
-                return this.email !== '' && this.password !== '';
+                return this.email !== '' && this.password !== ''
             }
         }
     }

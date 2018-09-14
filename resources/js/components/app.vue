@@ -8,13 +8,13 @@
             <div class="collapse navbar-collapse" id="navbar-primary">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a href="#" class="nav-link">Home <span class="sr-only">(current)</span></a>
+                        <router-link :to="{ name: 'home' }" class="nav-link">Home</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" :to="{ name: 'login' }">Login</router-link>
+                        <router-link :to="{ name: 'login' }" class="nav-link">Login</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" :to="{ name: 'register' }">Register</router-link>
+                        <router-link :to="{ name: 'register' }" class="nav-link">Register</router-link>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">Tweet</a>
@@ -27,22 +27,3 @@
         </div>
     </div>
 </template>
-<script>
-    export default {        
-        methods: {
-            userName() {
-                return this.storageItem('userName');
-            },
-            email() {
-                return this.storageItem('email');
-            },
-            storageItem(item) {
-                if (window.localStorage) {
-                    let storage = window.localStorage;
-                    return storage.getItem(item);
-                }
-                return null;
-            }
-        }
-    }
-</script>

@@ -6,6 +6,12 @@ Vue.use(VueRouter)
 // Router
 let router = new VueRouter({
     routes: [
+        {
+            path: '/home',
+            name: 'home',
+            component: require('../components/home'),
+            meta: { auth: true }
+        },
         { 
             path: '/login',
             name: 'login',
