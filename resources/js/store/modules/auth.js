@@ -21,7 +21,7 @@ export default {
             window.localStorage.setItem('accessToken', data.access_token)     
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + data.access_token
             
-            router.push({ name: 'home' })
+            router.push({ name: 'tweet' })
         },
         
         logout({ commit }) {

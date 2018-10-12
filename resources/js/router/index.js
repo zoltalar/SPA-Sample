@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -10,7 +11,7 @@ let router = new VueRouter({
             path: '/home',
             name: 'home',
             component: require('../components/home'),
-            meta: { auth: true }
+            meta: { auth: false }
         },
         { 
             path: '/login',
@@ -23,8 +24,22 @@ let router = new VueRouter({
             name: 'register',
             component: require('../components/register'),
             meta: { auth: false }
+        },
+        {
+            path: '/tweet',
+            name: 'tweet',
+            component: require('../components/tweet'),
+            meta: { auth: true }
         }
     ]
+})
+
+router.beforeEach((to, from, next) => {
+    if ( ! store.getters.isLoggedIn && to.meta.auth) {
+        return next('/login')
+    }
+    
+    next()
 })
 
 export default router

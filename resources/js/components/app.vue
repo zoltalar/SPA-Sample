@@ -11,7 +11,7 @@
                         <router-link :to="{ name: 'home' }" class="nav-link">Home</router-link>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Tweet</a>
+                        <router-link :to="{ name: 'tweet' }" class="nav-link">Tweet</router-link>
                     </li>
                     <li class="nav-item" v-show="!isLoggedIn">
                         <router-link :to="{ name: 'register' }" class="nav-link">Register</router-link>
