@@ -27,8 +27,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
-            'expires_at' => $token->expires_at->toDateTimeString(),
-            'user' => $user->toArray()
+            'expires_at' => $token->expires_at->toDateTimeString()
         ]);
     }
 
