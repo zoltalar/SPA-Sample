@@ -15,8 +15,10 @@ class TweetsController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        return json_encode(['xyz' => $request->user()]);
+        
         return TweetResource::collection(Tweet::paginate());
     }
 
