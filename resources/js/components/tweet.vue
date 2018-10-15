@@ -28,7 +28,14 @@
                 return this.tweet !== ''
             },
             countdown() {
-                this.remainingCount = this.maxCount - this.tweet.length
+                let count = this.maxCount - this.tweet.length
+                
+                if (count <= 0) {
+                    count = 0
+                    this.tweet = this.tweet.substr(0, this.maxCount)
+                }
+                
+                this.remainingCount = count
             }
         }
     }

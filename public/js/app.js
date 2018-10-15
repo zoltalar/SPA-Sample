@@ -17037,13 +17037,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             error: false,
             tweet: '',
-            max: 140
+            maxCount: 140,
+            remainingCount: 140
         };
     },
 
     methods: {
         validated: function validated() {
             return this.tweet !== '';
+        },
+        countdown: function countdown() {
+            var count = this.maxCount - this.tweet.length;
+
+            if (count <= 0) {
+                count = 0;
+                this.tweet = this.tweet.substr(0, this.maxCount);
+            }
+
+            this.remainingCount = count;
         }
     }
 });
@@ -17073,6 +17084,7 @@ var render = function() {
             attrs: { rows: "4" },
             domProps: { value: _vm.tweet },
             on: {
+              keyup: _vm.countdown,
               input: function($event) {
                 if ($event.target.composing) {
                   return
@@ -17083,7 +17095,7 @@ var render = function() {
           }),
           _vm._v(" "),
           _c("small", { staticClass: "form-text text-muted" }, [
-            _vm._v("Testing")
+            _vm._v(_vm._s(_vm.remainingCount))
           ])
         ]),
         _vm._v(" "),
