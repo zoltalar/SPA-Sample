@@ -3,39 +3,70 @@
         <div class="col-sm-4 offset-4">
             <form>
                 <div class="form-group">
-                    <textarea class="form-control" rows="4" v-model="tweet" @keyup="countdown"></textarea>
+                    <textarea class="form-control" rows="4" v-model="content" @keyup="countdown"></textarea>
+                    <div class="invalid-feedback" v-show="error.content !== ''" :class="{ 'd-block': error.content !== '' }">
+                        {{ error.content }}
+                    </div>
                     <small class="form-text text-muted">{{ remainingCount }}</small>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary btn-block" :disabled="!validated()">Tweet</button>
+                    <button class="btn btn-primary btn-block" @click="tweet()" :disabled="!validated()">Tweet</button>
                 </div>
             </form>
         </div>
     </div>
 </template>
 <script>
+    import router from '../router'
+    
     export default {
         data() {
             return {
-                error: false,
-                tweet: '',
+                error: {
+                    content: ''
+                },
+                content: '',
                 maxCount: 140,
                 remainingCount: 140
             }
         },
         methods: {
             validated() {
-                return this.tweet !== ''
+                return this.content !== ''
             },
             countdown() {
-                let count = this.maxCount - this.tweet.length
+                let count = this.maxCount - this.content.length
                 
                 if (count <= 0) {
                     count = 0
-                    this.tweet = this.tweet.substr(0, this.maxCount)
+                    this.content = this.content.substr(0, this.maxCount)
                 }
                 
                 this.remainingCount = count
+            },
+            reset() {
+                this.error = {
+                    content: ''
+                }
+            },
+            tweet() {
+                axios
+                    .post('/api/tweets/store', {
+                        content: this.content
+                    })
+                    .then(response => {
+                        this.reset();
+
+                        if (response.data.error) {
+                            for (let property in response.data.error) {
+                                if (response.data.error[property][0]) {
+                                    this.error[property] = response.data.error[property][0];
+                                }
+                            }
+                        } else {
+                            router.push({ name: 'home' })
+                        }
+                    })
             }
         }
     }

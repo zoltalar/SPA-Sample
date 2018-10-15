@@ -16,22 +16,23 @@ class TweetsController extends Controller
     }
 
     public function index(Request $request)
-    {
-        return json_encode(['xyz' => $request->user()]);
-        
+    {        
         return TweetResource::collection(Tweet::paginate());
     }
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), Tweet::rules());
+        $data = $request->all();
+        $data['user_id'] = $request->user()->id;
+        
+        $validator = Validator::make($data, Tweet::rules());
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()]);
         }
 
         $tweet = new Tweet();
-        $tweet->fill($request->only($tweet->getUnguarded()));
+        $tweet->fill($data);
 
         if ($tweet->save()) {
             return new TweetResource($tweet);

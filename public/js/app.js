@@ -11477,6 +11477,56 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(7);
+
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
+
+// Router
+var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
+    routes: [{
+        path: '/home',
+        name: 'home',
+        component: __webpack_require__(23),
+        meta: { auth: false }
+    }, {
+        path: '/login',
+        name: 'login',
+        component: __webpack_require__(25),
+        meta: { auth: false }
+    }, {
+        path: '/register',
+        name: 'register',
+        component: __webpack_require__(28),
+        meta: { auth: false }
+    }, {
+        path: '/tweet',
+        name: 'tweet',
+        component: __webpack_require__(31),
+        meta: { auth: true }
+    }]
+});
+
+router.beforeEach(function (to, from, next) {
+    if (!__WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].getters.isLoggedIn && to.meta.auth) {
+        return next('/login');
+    }
+
+    next();
+});
+
+/* harmony default export */ __webpack_exports__["a"] = (router);
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11577,10 +11627,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -11768,56 +11818,6 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-
-/***/ }),
-/* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(7);
-
-
-
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
-
-// Router
-var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
-    routes: [{
-        path: '/home',
-        name: 'home',
-        component: __webpack_require__(23),
-        meta: { auth: false }
-    }, {
-        path: '/login',
-        name: 'login',
-        component: __webpack_require__(25),
-        meta: { auth: false }
-    }, {
-        path: '/register',
-        name: 'register',
-        component: __webpack_require__(28),
-        meta: { auth: false }
-    }, {
-        path: '/tweet',
-        name: 'tweet',
-        component: __webpack_require__(31),
-        meta: { auth: true }
-    }]
-});
-
-router.beforeEach(function (to, from, next) {
-    if (!__WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].getters.isLoggedIn && to.meta.auth) {
-        return next('/login');
-    }
-
-    next();
-});
-
-/* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
 /* 7 */
@@ -12127,7 +12127,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_App__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_App__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store__ = __webpack_require__(7);
 
 
@@ -12405,7 +12405,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(6)))
 
 /***/ }),
 /* 17 */
@@ -16259,7 +16259,7 @@ var index_esm = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router__ = __webpack_require__(4);
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -17016,6 +17016,10 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router__ = __webpack_require__(4);
+//
+//
+//
 //
 //
 //
@@ -17032,11 +17036,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            error: false,
-            tweet: '',
+            error: {
+                content: ''
+            },
+            content: '',
             maxCount: 140,
             remainingCount: 140
         };
@@ -17044,17 +17052,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         validated: function validated() {
-            return this.tweet !== '';
+            return this.content !== '';
         },
         countdown: function countdown() {
-            var count = this.maxCount - this.tweet.length;
+            var count = this.maxCount - this.content.length;
 
             if (count <= 0) {
                 count = 0;
-                this.tweet = this.tweet.substr(0, this.maxCount);
+                this.content = this.content.substr(0, this.maxCount);
             }
 
             this.remainingCount = count;
+        },
+        reset: function reset() {
+            this.error = {
+                content: ''
+            };
+        },
+        tweet: function tweet() {
+            var _this = this;
+
+            axios.post('/api/tweets/store', {
+                content: this.content
+            }).then(function (response) {
+                _this.reset();
+
+                if (response.data.error) {
+                    for (var property in response.data.error) {
+                        if (response.data.error[property][0]) {
+                            _this.error[property] = response.data.error[property][0];
+                        }
+                    }
+                } else {
+                    __WEBPACK_IMPORTED_MODULE_0__router__["a" /* default */].push({ name: 'home' });
+                }
+            });
         }
     }
 });
@@ -17076,23 +17108,46 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.tweet,
-                expression: "tweet"
+                value: _vm.content,
+                expression: "content"
               }
             ],
             staticClass: "form-control",
             attrs: { rows: "4" },
-            domProps: { value: _vm.tweet },
+            domProps: { value: _vm.content },
             on: {
               keyup: _vm.countdown,
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.tweet = $event.target.value
+                _vm.content = $event.target.value
               }
             }
           }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.error.content !== "",
+                  expression: "error.content !== ''"
+                }
+              ],
+              staticClass: "invalid-feedback",
+              class: { "d-block": _vm.error.content !== "" }
+            },
+            [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.error.content) +
+                  "\n                "
+              )
+            ]
+          ),
           _vm._v(" "),
           _c("small", { staticClass: "form-text text-muted" }, [
             _vm._v(_vm._s(_vm.remainingCount))
@@ -17104,7 +17159,12 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-primary btn-block",
-              attrs: { disabled: !_vm.validated() }
+              attrs: { disabled: !_vm.validated() },
+              on: {
+                click: function($event) {
+                  _vm.tweet()
+                }
+              }
             },
             [_vm._v("Tweet")]
           )
@@ -17139,7 +17199,7 @@ module.exports = __webpack_require__(35);
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(8);
 var Axios = __webpack_require__(37);
-var defaults = __webpack_require__(4);
+var defaults = __webpack_require__(5);
 
 /**
  * Create an instance of Axios
@@ -17222,7 +17282,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(4);
+var defaults = __webpack_require__(5);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(46);
 var dispatchRequest = __webpack_require__(47);
@@ -17761,7 +17821,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(48);
 var isCancel = __webpack_require__(11);
-var defaults = __webpack_require__(4);
+var defaults = __webpack_require__(5);
 var isAbsoluteURL = __webpack_require__(49);
 var combineURLs = __webpack_require__(50);
 
