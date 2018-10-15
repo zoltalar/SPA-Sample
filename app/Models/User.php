@@ -34,6 +34,11 @@ final class User extends Base implements
         'password',
         'remember_token',
     ];
+    
+    public function tweets()
+    {
+        return $this->hasMany(User::class);
+    }
 
     /**
      * General validation rules.

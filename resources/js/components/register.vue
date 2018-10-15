@@ -56,21 +56,21 @@
                         password: this.password
                     })
                     .then(response => {
-                        this.reset();
+                        this.reset()
 
                         if (response.data.error) {
                             for (let property in response.data.error) {
                                 if (response.data.error[property][0]) {
-                                    this.error[property] = response.data.error[property][0];
+                                    this.error[property] = response.data.error[property][0]
                                 }
                             }
                         } else {
-                            this.registered = true;
+                            this.registered = true
                         }
                     })
             },
             validated() {
-                return this.name !== '' && this.email !== '' && this.password !== '';
+                return this.name !== '' && this.email !== '' && this.password !== ''
             },
             reset() {
                 this.error = {
@@ -80,16 +80,16 @@
                 }
             },
             hasErrors() {
-                let errors = false;
+                let errors = false
                 
                 for (let property in this.error) {
                     if (this.error[property] !== '') {
-                        errors = true;
-                        break;
+                        errors = true
+                        break
                     }
                 }
                 
-                return errors;
+                return errors
             }
         }
     }

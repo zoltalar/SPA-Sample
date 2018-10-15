@@ -3,7 +3,7 @@
         <div class="col-sm-4 offset-4">
             <form>
                 <div class="form-group">
-                    <textarea class="form-control" rows="4" v-model="content" @keyup="countdown"></textarea>
+                    <textarea class="form-control" rows="4" v-model="content" @keyup="countdown" placeholder="Post a tweet..."></textarea>
                     <div class="invalid-feedback" v-show="error.content !== ''" :class="{ 'd-block': error.content !== '' }">
                         {{ error.content }}
                     </div>
