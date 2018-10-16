@@ -2,18 +2,18 @@ import router from '../../router'
 
 export default {
     state: {
-       isLoggedIn: false
+       loggedIn: false
     },
     mutations: {        
         login(state) {
-            state.isLoggedIn = true
+            state.loggedIn = true
         },
         logout(state) {
-            state.isLoggedIn = false
+            state.loggedIn = false
         }
     },
     getters: {
-        isLoggedIn: state => state.isLoggedIn
+        loggedIn: state => state.loggedIn
     },
     actions: {
         login({ commit }, data) {

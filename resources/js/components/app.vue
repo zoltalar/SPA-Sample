@@ -13,13 +13,13 @@
                     <li class="nav-item">
                         <router-link :to="{ name: 'tweet' }" class="nav-link">Tweet</router-link>
                     </li>
-                    <li class="nav-item" v-show="!isLoggedIn">
+                    <li class="nav-item" v-show="loggedIn() === false">
                         <router-link :to="{ name: 'register' }" class="nav-link">Register</router-link>
                     </li>
-                    <li class="nav-item" v-show="!isLoggedIn">
+                    <li class="nav-item" v-show="loggedIn() === false">
                         <router-link :to="{ name: 'login' }" class="nav-link">Login</router-link>
                     </li>
-                    <li class="nav-item" v-show="isLoggedIn">
+                    <li class="nav-item" v-show="loggedIn() === true">
                         <a href="#" class="nav-link" @click="logout">Logout</a>
                     </li>
                 </ul>
@@ -35,11 +35,9 @@
         methods: {
             logout() {
                 this.$store.dispatch('logout')
-            }
-        },
-        computed: {
-            isLoggedIn() {
-                return this.$store.getters.isLoggedIn
+            },
+            loggedIn() {
+                return this.$store.getters.loggedIn
             }
         }
     }

@@ -11516,7 +11516,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
 });
 
 router.beforeEach(function (to, from, next) {
-    if (!__WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].getters.isLoggedIn && to.meta.auth) {
+    if (__WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].getters.loggedIn === false && to.meta.auth) {
         return next('/login');
     }
 
@@ -12497,11 +12497,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         logout: function logout() {
             this.$store.dispatch('logout');
-        }
-    },
-    computed: {
-        isLoggedIn: function isLoggedIn() {
-            return this.$store.getters.isLoggedIn;
+        },
+        loggedIn: function loggedIn() {
+            return this.$store.getters.loggedIn;
         }
     }
 });
@@ -12572,8 +12570,8 @@ var render = function() {
                     {
                       name: "show",
                       rawName: "v-show",
-                      value: !_vm.isLoggedIn,
-                      expression: "!isLoggedIn"
+                      value: _vm.loggedIn() === false,
+                      expression: "loggedIn() === false"
                     }
                   ],
                   staticClass: "nav-item"
@@ -12598,8 +12596,8 @@ var render = function() {
                     {
                       name: "show",
                       rawName: "v-show",
-                      value: !_vm.isLoggedIn,
-                      expression: "!isLoggedIn"
+                      value: _vm.loggedIn() === false,
+                      expression: "loggedIn() === false"
                     }
                   ],
                   staticClass: "nav-item"
@@ -12624,8 +12622,8 @@ var render = function() {
                     {
                       name: "show",
                       rawName: "v-show",
-                      value: _vm.isLoggedIn,
-                      expression: "isLoggedIn"
+                      value: _vm.loggedIn() === true,
+                      expression: "loggedIn() === true"
                     }
                   ],
                   staticClass: "nav-item"
@@ -16264,19 +16262,19 @@ var index_esm = {
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     state: {
-        isLoggedIn: false
+        loggedIn: false
     },
     mutations: {
         login: function login(state) {
-            state.isLoggedIn = true;
+            state.loggedIn = true;
         },
         logout: function logout(state) {
-            state.isLoggedIn = false;
+            state.loggedIn = false;
         }
     },
     getters: {
-        isLoggedIn: function isLoggedIn(state) {
-            return state.isLoggedIn;
+        loggedIn: function loggedIn(state) {
+            return state.loggedIn;
         }
     },
     actions: {
@@ -16371,6 +16369,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -16386,10 +16389,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get('/api/tweets/index').then(function (response) {
                 _this.tweets = response.data.data;
             });
+        },
+        loggedIn: function loggedIn() {
+            return this.$store.getters.loggedIn;
         }
     },
-    created: function created() {
-        this.load();
+    mounted: function mounted() {
+        if (this.loggedIn() === true) {
+            this.load();
+        }
     }
 });
 
@@ -16401,30 +16409,52 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _c(
-      "div",
-      { staticClass: "col-4 offset-4" },
-      _vm._l(_vm.tweets, function(tweet) {
-        return _c("div", { staticClass: "card mb-4" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _vm._v(
-              "\n                " + _vm._s(tweet.created_at) + "\n            "
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("blockquote", { staticClass: "blockquote mb-0" }, [
-              _c("p", [_vm._v(_vm._s(tweet.content))]),
-              _vm._v(" "),
-              _c("footer", { staticClass: "blockquote-footer" }, [
-                _vm._v(_vm._s(tweet.user.name))
-              ])
-            ])
-          ])
+  return _c("div", [
+    _vm.loggedIn() === false
+      ? _c("div", { staticClass: "text-center" }, [
+          _c(
+            "p",
+            [
+              _vm._v("Please "),
+              _c("router-link", { attrs: { to: { name: "login" } } }, [
+                _vm._v("login")
+              ]),
+              _vm._v(" to view latest tweets.")
+            ],
+            1
+          )
         ])
-      })
-    )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.loggedIn() === true
+      ? _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col-4 offset-4" },
+            _vm._l(_vm.tweets, function(tweet) {
+              return _c("div", { staticClass: "card mb-4" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(tweet.created_at) +
+                      "\n                "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("blockquote", { staticClass: "blockquote mb-0" }, [
+                    _c("p", [_vm._v(_vm._s(tweet.content))]),
+                    _vm._v(" "),
+                    _c("footer", { staticClass: "blockquote-footer" }, [
+                      _vm._v(_vm._s(tweet.user.name))
+                    ])
+                  ])
+                ])
+              ])
+            })
+          )
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
