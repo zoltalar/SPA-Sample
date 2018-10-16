@@ -35,6 +35,13 @@
                         this.tweets = response.data.data
                     })
             },
+            listen() {
+                Echo
+                    .channel('tweets.new')
+                    .listen('NewTweet', (e) => {
+                        alert('yahooooooooo...')
+                    })
+            },
             loggedIn() {
                 return this.$store.getters.loggedIn
             }
@@ -42,6 +49,7 @@
         mounted() {
             if (this.loggedIn() === true) {
                 this.load()
+                this.listen()
             }
         }
     }

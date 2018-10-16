@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\NewTweet;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Tweet as TweetResource;
 use App\Models\Tweet;
@@ -35,6 +36,7 @@ class TweetsController extends Controller
         $tweet->fill($data);
 
         if ($tweet->save()) {
+            event(new NewTweet());
             return new TweetResource($tweet);
         }
     }
