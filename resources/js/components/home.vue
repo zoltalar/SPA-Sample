@@ -37,9 +37,9 @@
             },
             listen() {
                 Echo
-                    .channel('tweets.new')
+                    .channel('tweets')
                     .listen('NewTweet', (e) => {
-                        alert('yahooooooooo...')
+                        this.tweets.push(e.tweet)
                     })
             },
             loggedIn() {

@@ -12142,7 +12142,9 @@ window.Pusher = __webpack_require__(55);
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_4_laravel_echo___default.a({
     broadcaster: 'pusher',
-    key: '8da364a9b6da90013c97'
+    key: '8da364a9b6da90013c97',
+    cluster: 'eu',
+    encrypted: true
 });
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
@@ -16400,8 +16402,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         listen: function listen() {
-            Echo.channel('tweets.new').listen('NewTweet', function (e) {
-                alert('yahooooooooo...');
+            var _this2 = this;
+
+            Echo.channel('tweets').listen('NewTweet', function (e) {
+                _this2.tweets.push(e.tweet);
             });
         },
         loggedIn: function loggedIn() {

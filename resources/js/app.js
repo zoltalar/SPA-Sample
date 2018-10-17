@@ -9,7 +9,9 @@ window.Pusher = require('pusher-js')
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: '8da364a9b6da90013c97'
+    key: '8da364a9b6da90013c97',
+    cluster: 'eu',
+    encrypted: true
 });
 
 const app = new Vue({

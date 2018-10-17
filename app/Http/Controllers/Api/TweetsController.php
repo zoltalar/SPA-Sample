@@ -36,8 +36,10 @@ class TweetsController extends Controller
         $tweet->fill($data);
 
         if ($tweet->save()) {
-            event(new NewTweet());
-            return new TweetResource($tweet);
+            $resource = new TweetResource($tweet);
+            event(new NewTweet($resource));
+            
+            return $resource;
         }
     }
 }
