@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Events\NewTweet;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TweetRequest;
 use App\Http\Resources\Tweet as TweetResource;
 use App\Models\Tweet;
-use Illuminate\Http\Request;
-use Validator;
 
 class TweetsController extends Controller
 {
@@ -16,24 +15,16 @@ class TweetsController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function index(Request $request)
+    public function index()
     {        
         return TweetResource::collection(Tweet::paginate());
     }
 
-    public function store(Request $request)
+    public function store(TweetRequest $request)
     {
-        $data = $request->all();
-        $data['user_id'] = $request->user()->id;
-        
-        $validator = Validator::make($data, Tweet::rules());
-
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()]);
-        }
-
         $tweet = new Tweet();
-        $tweet->fill($data);
+        $tweet->fill($request->only($tweet->getUnguarded()));
+        $tweet->user_id = $request->user()->id;
 
         if ($tweet->save()) {
             $resource = new TweetResource($tweet);

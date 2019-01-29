@@ -17154,7 +17154,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            error: {
+            errors: {
                 content: ''
             },
             content: '',
@@ -17177,29 +17177,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.remainingCount = count;
         },
-        reset: function reset() {
-            this.error = {
-                content: ''
-            };
-        },
         tweet: function tweet() {
             var _this = this;
 
             axios.post('/api/tweets/store', {
                 content: this.content
             }).then(function (response) {
-                _this.reset();
+                _this.clearErrors();
+                _this.setErrors(response);
 
-                if (response.data.error) {
-                    for (var property in response.data.error) {
-                        if (response.data.error[property][0]) {
-                            _this.error[property] = response.data.error[property][0];
-                        }
-                    }
-                } else {
+                if (response.data.data.id) {
                     __WEBPACK_IMPORTED_MODULE_0__router__["a" /* default */].push({ name: 'home' });
                 }
+            }).catch(function (error) {
+                _this.clearErrors();
+                _this.setErrors(error.response);
             });
+        },
+        clearErrors: function clearErrors() {
+            this.errors = {
+                content: ''
+            };
+        },
+        setErrors: function setErrors(response) {
+            if (response.data.errors) {
+                for (var property in response.data.errors) {
+                    if (response.data.errors[property][0]) {
+                        this.errors[property] = response.data.errors[property][0];
+                    }
+                }
+            }
         }
     }
 });
@@ -17246,17 +17253,17 @@ var render = function() {
                 {
                   name: "show",
                   rawName: "v-show",
-                  value: _vm.error.content !== "",
-                  expression: "error.content !== ''"
+                  value: _vm.errors.content !== "",
+                  expression: "errors.content !== ''"
                 }
               ],
               staticClass: "invalid-feedback",
-              class: { "d-block": _vm.error.content !== "" }
+              class: { "d-block": _vm.errors.content !== "" }
             },
             [
               _vm._v(
                 "\n                    " +
-                  _vm._s(_vm.error.content) +
+                  _vm._s(_vm.errors.content) +
                   "\n                "
               )
             ]
@@ -17272,7 +17279,7 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-primary btn-block",
-              attrs: { disabled: !_vm.validated() },
+              attrs: { type: "button", disabled: !_vm.validated() },
               on: {
                 click: function($event) {
                   _vm.tweet()
