@@ -39,18 +39,4 @@ final class User extends Base implements
     {
         return $this->hasMany(User::class);
     }
-
-    /**
-     * General validation rules.
-     *
-     * @return  array
-     */
-    public static function rules()
-    {
-        return [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:5|max:10'
-        ];
-    }
 }
