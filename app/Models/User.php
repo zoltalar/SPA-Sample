@@ -39,4 +39,14 @@ final class User extends Base implements
     {
         return $this->hasMany(User::class);
     }
+
+    /**
+     * Hash 'password' attribute.
+     *
+     * @param   string $password raw password
+     */
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
 }
