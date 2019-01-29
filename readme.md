@@ -1,5 +1,5 @@
 # Twitter
-Laravel 5 and Vuejs 2 application sample to display 'tweeting' short messages.
+Laravel 5 and Vuejs 2 application sample to create and display short messages.
 
 #### Installation
 
